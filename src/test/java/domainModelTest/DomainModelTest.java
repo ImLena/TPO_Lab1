@@ -3,7 +3,6 @@ package domainModelTest;
 
 import domainModel.*;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -45,6 +44,18 @@ public class DomainModelTest{
 
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {" Ему хотелось, чтобы здесь было что-нибудь простое и знакомое, за что можно было бы мысленно зацепиться.\n" +
+            "Он чувствовал бы себя увереннее, если бы "})
+    public void isArthurNotConfidentWishing(String input) {
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+        location.getArthur().setConfident(false);
+        location.getArthur().printWish();
+        Assertions.assertEquals(output.toString(), input);
+
+    }
+
     @Test
     public void canFordTakeFlacon() {
         Assertions.assertTrue(location.getFord().tryTakeFlacon());
@@ -58,6 +69,12 @@ public class DomainModelTest{
     }
 
     @Test
+    public void hasFishWithoutFlacon() {
+        Flacon flacon = new Flacon("стеклянный");
+        Assertions.assertFalse(flacon.isHasFish());
+    }
+
+    @Test
     public void canFordGiveOfferWithoutFlacon() {
         Assertions.assertFalse(location.getFord().tryOffer());
     }
@@ -66,6 +83,12 @@ public class DomainModelTest{
     public void canFordGiveOfferWithFlacon() {
         location.getFord().tryTakeFlacon();
         Assertions.assertTrue(location.getFord().tryOffer());
+    }
+    @Test
+    public void canFordGiveOfferWithoutFish() {
+        location.getFord().tryTakeFlacon();
+        location.getFord().getFlacon().setHasFish(false);
+        Assertions.assertFalse(location.getFord().tryOffer());
     }
 
 }

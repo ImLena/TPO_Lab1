@@ -42,7 +42,7 @@ public class Location {
                 arthur.printWish();
                 getStaff();
                 ford.fordsDescription();
-                if (ford.tryOffer()) {
+                if (ford.tryOffer() && !staff.isEmpty()) {
                     arthur.wantToSee(new Staff("пакет кукурузных хлопьев", ""));
                 }
             }

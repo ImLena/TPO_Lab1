@@ -25,6 +25,5 @@ public class Flacon {
         fish = new Fish();
         fish.fishActions();
         setHasFish(fish.getFishDescription());
-        ;
     }
 }

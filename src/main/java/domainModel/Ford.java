@@ -1,6 +1,10 @@
 package domainModel;
 
 public class Ford {
+    public Flacon getFlacon() {
+        return flacon;
+    }
+
     private Flacon flacon;
 
     private boolean hasFlacon = false;
@@ -8,10 +12,8 @@ public class Ford {
     public boolean tryTakeFlacon() {
         if (!hasFlacon) {
             takeFlacon();
-            return true;
-        } else {
-            return false;
         }
+        return hasFlacon;
     }
 
     private void takeFlacon() {
@@ -26,12 +28,13 @@ public class Ford {
     }
     public boolean tryOffer(){
         if (hasFlacon) {
-            System.out.print("держащим маленькую рыбку");
-            getOffer();
-            return true;
-        } else {
-            return false;
+            if (flacon.isHasFish()) {
+                System.out.print("держащим маленькую рыбку");
+                getOffer();
+                return true;
+            }
         }
+            return false;
     }
 
     private void getOffer(){
