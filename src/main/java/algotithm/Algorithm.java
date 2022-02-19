@@ -6,9 +6,9 @@ import java.util.Collections;
 
 public class Algorithm {
 
-    public Integer[] simpleCountingSort(ArrayList<Integer> sourceArray){
-        Integer[] zerosArray = new Integer[Collections.max(sourceArray)+1];
-        Integer[] resultArray = new Integer[sourceArray.size()];
+    public int[] simpleCountingSort(int[] sourceArray){
+        int[] zerosArray = new int[Arrays.stream(sourceArray).max().getAsInt()+1];
+        int[] resultArray = new int[sourceArray.length];
 
         Arrays.fill(zerosArray, 0);
 
