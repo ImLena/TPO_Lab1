@@ -6,17 +6,9 @@ public class Location {
 
     private Ford ford;
     private Arthur arthur;
-    private ArrayList<Staff> staff = new ArrayList<>();
+    private final ArrayList<Staff> staff = new ArrayList<>();
     private boolean hasPeople = false;
     private boolean hasStaff = false;
-
-    public Arthur getArthur() {
-        return arthur;
-    }
-
-    public Ford getFord() {
-        return ford;
-    }
 
     public Location() {
         initLocation();
@@ -42,10 +34,14 @@ public class Location {
                 arthur.printWish();
                 getStaff();
                 ford.fordsDescription();
-                if (ford.tryOffer() && !staff.isEmpty()) {
-                    arthur.wantToSee(new Staff("пакет кукурузных хлопьев", ""));
-                }
+                arthurTryToSee();
             }
+        }
+    }
+
+    private void arthurTryToSee(){
+        if (ford.tryOffer() && !staff.isEmpty()) {
+            arthur.wantToSee(new Staff("пакет кукурузных хлопьев", ""));
         }
     }
 

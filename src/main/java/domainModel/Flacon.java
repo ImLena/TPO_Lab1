@@ -2,7 +2,8 @@ package domainModel;
 
 public class Flacon {
 
-    private String material;
+    private final String material;
+    private boolean hasFish = false;
 
     public boolean isHasFish() {
         return hasFish;
@@ -12,17 +13,14 @@ public class Flacon {
         this.hasFish = hasFish;
     }
 
-    private boolean hasFish = false;
-
     public Flacon(String material) {
         this.material = material;
     }
-    private Fish fish;
 
     public void getFlaconDescription() {
         System.out.print(material);
         System.out.print(" флакончик, в котором ");
-        fish = new Fish();
+        Fish fish = new Fish();
         fish.fishActions();
         setHasFish(fish.getFishDescription());
     }

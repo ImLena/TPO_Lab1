@@ -1,13 +1,12 @@
 package domainModel;
 
 public class Ford {
+    private Flacon flacon;
+    private boolean hasFlacon = false;
+
     public Flacon getFlacon() {
         return flacon;
     }
-
-    private Flacon flacon;
-
-    private boolean hasFlacon = false;
 
     public boolean tryTakeFlacon() {
         if (!hasFlacon) {

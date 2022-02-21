@@ -1,6 +1,7 @@
 package domainModel;
 
 public class Arthur {
+
     private boolean isConfident = true;
 
     public void setConfident(boolean confident) {
