@@ -4,10 +4,10 @@ import static java.lang.Double.NaN;
 
 public class Arccos {
 
-    final static double ACCURATE = 0.001;
+    private final double ACCURATE = 0.001;
 
     public double getAccurate() {
-        return ACCURATE;
+        return this.ACCURATE;
     }
 
     private double arccosTailor(double x, int n) {

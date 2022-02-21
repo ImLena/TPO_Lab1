@@ -1,17 +1,22 @@
 package arccos;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import static java.lang.Float.NaN;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.stream.Stream;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ArccosTest {
 
-    private static Stream<Arguments> testArccos() {
+    private Arccos arccos;
+
+    private Stream<Arguments> testArccos() {
         return Stream.of(
                 Arguments.of(-1, 0.0),
                 Arguments.of(-0.9, 2.69),
@@ -30,18 +35,18 @@ public class ArccosTest {
         );
     }
 
+    @BeforeEach
+    public void setUp() {
+        this.arccos = new Arccos();
+    }
+
 
     @ParameterizedTest(name = "{index}: arccos({0}) = {1}")
     @MethodSource
     @DisplayName("(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧")
-    public void testArccos(double in, double out) {
-        double expected, actual;
-        Arccos arccos = new Arccos();
-        expected = out;
+    public void testArccos(double in, double expected) {
+        double actual;
         actual = arccos.arccos(in);
-        System.out.println("x = " + in + " actual = " + actual
-                + " expected = " + expected);
-        Assertions.assertEquals(expected, actual, arccos.getAccurate());
-
+        assertEquals(expected, actual, arccos.getAccurate());
     }
 }
