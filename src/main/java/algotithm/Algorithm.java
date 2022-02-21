@@ -5,6 +5,11 @@ import java.util.Arrays;
 public class Algorithm {
 
     public int[] simpleCountingSort(int[] sourceArray) {
+        if (checkSourceArray(sourceArray)) return simpleCountingSortAlgorithm(sourceArray);
+        else throw new IllegalArgumentException();
+    }
+
+    public int[] simpleCountingSortAlgorithm(int[] sourceArray) {
         int[] zerosArray;
         int[] resultArray = new int[sourceArray.length];
 
@@ -16,9 +21,14 @@ public class Algorithm {
                 resultArray[idx++] = i;
             }
         }
-
         return resultArray;
+    }
 
+    public boolean checkSourceArray(int[] sourceArray){
+        for (int element: sourceArray){
+            if (element < 0 || element > 1000) return false;
+        }
+        return true;
     }
 
     public int[] countValues(int[] sourceArray) {

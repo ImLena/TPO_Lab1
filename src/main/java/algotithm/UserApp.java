@@ -11,7 +11,11 @@ public class UserApp {
         int[] sourceArray = readSize();
 
         System.out.println("Отсортированный массив:");
-        System.out.println(Arrays.toString(algorithm.simpleCountingSort(sourceArray)));
+        try {
+            System.out.println(Arrays.toString(algorithm.simpleCountingSort(sourceArray)));
+        } catch (IllegalArgumentException e){
+            System.out.println("Введены недопустимые значения");
+        }
     }
 
     private int[] readSize(){

@@ -1,26 +1,33 @@
 package algorithm;
 
 import algotithm.Algorithm;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AlgorithmTest {
 
-    public static ArrayList<int[]> source = new ArrayList<>();
-    public static ArrayList<int[]> zeros = new ArrayList<>();
-    public static ArrayList<int[]> results = new ArrayList<>();
-    public Algorithm algorithm = new Algorithm();
+    private List<int[]> source;
+    private List<int[]> zeros;
+    private List<int[]> results;
+    private Algorithm algorithm;
 
     @BeforeAll
-    public static void setValues() {
+    public void setUp() {
+        source = new ArrayList<>();
+        zeros = new ArrayList<>();
+        results = new ArrayList<>();
+        algorithm = new Algorithm();
         zeros.add(new int[]{0, 0, 1, 1, 1, 1, 1, 0, 1, 3, 0, 0, 1, 3, 1, 3, 0, 1, 0, 1, 1, 2, 1, 0, 0, 2, 1, 1, 2, 0, 1});
         source.add(new int[]{21, 28, 17, 6, 30, 19, 5, 13, 9, 26, 13, 15, 25, 25, 21, 3, 8, 4, 9, 13, 22, 28, 9, 2, 27, 20, 15, 14, 12, 15});
         results.add(new int[]{2, 3, 4, 5, 6, 8, 9, 9, 9, 12, 13, 13, 13, 14, 15, 15, 15, 17, 19, 20, 21, 21, 22, 25, 25, 26, 27, 28, 28, 30});
@@ -37,7 +44,7 @@ public class AlgorithmTest {
     }
 
 
-    private static Stream<Arguments> arraysProvider() {
+    private Stream<Arguments> arraysProvider() {
         return Stream.of(
                 Arguments.of(source.get(0), results.get(0)),
                 Arguments.of(source.get(1), results.get(1)),
@@ -46,7 +53,7 @@ public class AlgorithmTest {
         );
     }
 
-    private static Stream<Arguments> zeroArrayProvider() {
+    private Stream<Arguments> zeroArrayProvider() {
         return Stream.of(
                 Arguments.of(source.get(0), zeros.get(0)),
                 Arguments.of(source.get(1), zeros.get(1)),
@@ -60,7 +67,7 @@ public class AlgorithmTest {
     @DisplayName("╯°□°）╯")
     public void testCountingSort(int[] input, int[] output) {
         int[] res = algorithm.simpleCountingSort(input);
-        Assertions.assertEquals(Arrays.toString(Arrays.stream(res).toArray()), Arrays.toString(Arrays.stream(output).toArray()));
+        assertEquals(Arrays.toString(Arrays.stream(res).toArray()), Arrays.toString(Arrays.stream(output).toArray()));
 
     }
 
@@ -69,7 +76,19 @@ public class AlgorithmTest {
     @DisplayName("Tests for zeros array")
     public void testZerosArray(int[] input, int[] output) {
         int[] res = algorithm.countValues(input);
-        Assertions.assertEquals(Arrays.toString(Arrays.stream(res).toArray()), Arrays.toString(Arrays.stream(output).toArray()));
+        assertEquals(Arrays.toString(Arrays.stream(res).toArray()), Arrays.toString(Arrays.stream(output).toArray()));
 
+    }
+
+    @Test
+    public void testNegativeValues() {
+        int[] sourceArray = {-1, 2, 3};
+        assertThrows(IllegalArgumentException.class, () -> algorithm.simpleCountingSort(sourceArray));
+    }
+
+    @Test
+    public void testBigValues() {
+        int[] sourceArray = {1001, 2, 3};
+        assertThrows(IllegalArgumentException.class, () -> algorithm.simpleCountingSort(sourceArray));
     }
 }
