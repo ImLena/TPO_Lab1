@@ -22,7 +22,7 @@ public class AlgorithmTest {
     private List<int[]> results;
     private Algorithm algorithm;
 
-    @BeforeAll
+    @BeforeAll  //Cannot use BeforeEach bc of arrayProviders
     public void setUp() {
         source = new ArrayList<>();
         zeros = new ArrayList<>();
@@ -40,7 +40,6 @@ public class AlgorithmTest {
         source.add(new int[]{21, 18, 10, 2, 29, 14, 16, 4, 17, 7, 27, 11, 23, 9, 18, 13, 4, 0, 17, 3, 23, 27, 15, 27, 2, 27, 26, 24, 9, 8});
         zeros.add(new int[]{1, 0, 2, 1, 2, 0, 0, 1, 1, 2, 1, 1, 0, 1, 1, 1, 1, 2, 2, 0, 0, 1, 0, 2, 1, 0, 1, 4, 0, 1});
         results.add(new int[]{0, 2, 2, 3, 4, 4, 7, 8, 9, 9, 10, 11, 13, 14, 15, 16, 17, 17, 18, 18, 21, 23, 23, 24, 26, 27, 27, 27, 27, 29});
-
     }
 
 
@@ -74,7 +73,7 @@ public class AlgorithmTest {
     @ParameterizedTest(name = "Test {index}")
     @MethodSource("zeroArrayProvider")
     @DisplayName("Tests for zeros array")
-    public void testZerosArray(int[] input, int[] output) {
+    public void testCountValues(int[] input, int[] output) {
         int[] res = algorithm.countValues(input);
         assertEquals(Arrays.toString(Arrays.stream(res).toArray()), Arrays.toString(Arrays.stream(output).toArray()));
 
